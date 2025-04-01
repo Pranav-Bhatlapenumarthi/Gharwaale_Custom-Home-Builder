@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+}
+
+.header {
+    background: #333;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.header nav a:hover {
+    box-shadow: 0 0.5em 0.5em -0.4em rgba(254, 254, 254, 0.858);
+    transform: translateY(-0.25em);
+}
+
+/*ABOUT US PAGE STYLING STARTS*/
+.container {
+    max-width: 50%;
+    margin: 2em auto;
+    padding: 1.5em;
+    background: white;
+    border-radius: 8px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+/*ABOUT US PAGE STYLING ENDS*/
+
+/*CONTACT PAGE STYLING STARTS*/
+.form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin-left: 25%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+    width: 150px;
+}
+
+input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: white;
+    box-shadow: 0 0.5em 0.5em -0.4em #333;
+    transform: translateY(-0.25em);
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    font-size: 14px;
+    bottom: 0;
+}
+
+/*CONTACT PAGE STYLING ENDS*/

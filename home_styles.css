@@ -1,0 +1,143 @@
+/* HOME PAGE STYLING STARTS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+}
+
+.header {
+    background: #333;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.header nav a:hover {
+    box-shadow: 0 0.5em 0.5em -0.4em rgba(254, 254, 254, 0.858);
+    transform: translateY(-0.25em);
+}
+
+.primary {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.primary:hover {
+    color: white;
+    box-shadow: 0 0.5em 0.5em -0.4em #333;
+    transform: translateY(-0.25em);
+}
+
+.hero {
+    padding: 15%;
+    background: url('images/hero_bg.jpg') no-repeat center center/cover;
+}
+
+.content {
+    padding: 10%;
+    background: white;
+    margin-bottom: 0;
+}
+
+.content h3 {
+    font-size: 2em;
+}
+
+.emoji {
+    font-size: 50px;
+}
+
+.feature-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 50px;
+}
+
+.feature-item {
+    text-align: center;
+    width: 200px;
+
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    font-size: 14px;
+}
+
+/*HOME PAGE STYLING ENDS*/
+
+/*WORKSPACE STYLING STARTS*/
+.work-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 20%;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+}
+
+.canvas p {
+    text-align: center;
+    color: rgba(118, 113, 113, 0.858);
+}
+
+.draggable {
+    padding: 10px;
+    margin: 10px 0;
+    background: white;
+    border: 2px solid #ccc;
+    text-align: center;
+    border-radius: 10px;
+    cursor: grab;
+}
+
+.draggable-item {
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    cursor: grab;
+    position: absolute;
+    border-radius: 8px;
+}
+
+.draggable:hover {
+    background-color: #333;
+    color: white;
+}
+
+.canvas {
+    width: 80%;
+    background-color: #fff;
+    border: 2px dashed #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/*WORKSPACE STYLING ENDS*/
