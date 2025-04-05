@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Workspace</title>
     <link rel="stylesheet" href="home_styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 </head>
 
 <body>
@@ -25,14 +27,14 @@
             <div class="draggable" draggable="true" id="window">🪟 Window</div>
             <div class="draggable" draggable="true" id="door">🚪 Door</div>
             <div class="draggable" draggable="true" id="furniture">🛏️ Furniture</div>
+            <button id="view-3d-btn">View 3D</button>
         </aside>
 
         <div class="canvas" id="canvas">
             <p>Drag and drop elements here</p>
         </div>
-    </div>
-
-    <script src="script2.js"></script>
+    </div>  
+    <script defer src="script2.js"></script>
 </body>
 
 </html>

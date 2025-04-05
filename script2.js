@@ -1,15 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
     const draggables = document.querySelectorAll(".draggable");
     const canvas = document.getElementById("canvas");
+    const view3DButton = document.getElementById("view-3d-btn");
+
+    let placedElements = [];
 
     // Enable dragging from toolbar
     draggables.forEach(item => {
         item.addEventListener("dragstart", (e) => {
-            e.dataTransfer.setData("text/plain", e.target.id);
+                console.log("Dragging: ", e.target.id);
+                e.dataTransfer.setData("text/plain", e.target.id);
         });
     });
 
-    // Allow drop on the canvas
+    // Allow drop on canvas
     canvas.addEventListener("dragover", (e) => {
         e.preventDefault();
     });
@@ -18,17 +22,43 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         const itemId = e.dataTransfer.getData("text/plain");
         const element = document.getElementById(itemId).cloneNode(true);
-        element.id = `${itemId}-${Date.now()}`; // Unique ID to avoid duplicates
+
+        element.id = `${itemId}-${Date.now()}`;
         element.style.position = "absolute";
-        element.style.left = `${e.clientX - canvas.offsetLeft}px`;
-        element.style.top = `${e.clientY - canvas.offsetTop}px`;
+        const x = e.clientX - canvas.offsetLeft;
+        const y = e.clientY - canvas.offsetTop
+        element.style.left = `${x}px`;
+        element.style.top = `${y}px`;
         element.classList.add("placed-item");
 
         makeDraggable(element);
         canvas.appendChild(element);
+        
+        // Save this to localStorage so we can retrieve it in the 3D page
+        const objData = {
+            id: itemId,
+            type: "box", // or any object type
+            position: { x, y }
+        };
+
+        let storedObjects = JSON.parse(localStorage.getItem("objects")) || [];
+        storedObjects.push(objData);
+        localStorage.setItem("objects", JSON.stringify(storedObjects));
+        console.log(storedObjects)
+        console.log("Object stored for 3D:", objData);
+        // placedElements.push({
+        //     id: element.id,
+        //     type: itemId, 
+        //     x: element.style.left,
+        //     y: element.style.top
+        // });
+
+        // // Show the 3D button if elements exist
+        // if (placedElements.length > 0) {
+        //     view3DButton.style.display = "block";
+        // }
     });
 
-    // Enable movement of placed elements
     function makeDraggable(element) {
         let draggedElement = null;
         let offsetX = 0, offsetY = 0;
@@ -45,15 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let x = e.clientX - offsetX;
             let y = e.clientY - offsetY;
-
-            // Keep within canvas boundaries
-            const rect = canvas.getBoundingClientRect();
-            const elemWidth = draggedElement.offsetWidth;
-            const elemHeight = draggedElement.offsetHeight;
-
-            x = Math.max(0, Math.min(x, rect.width - elemWidth));
-            y = Math.max(0, Math.min(y, rect.height - elemHeight));
-
             draggedElement.style.left = `${x}px`;
             draggedElement.style.top = `${y}px`;
         });
@@ -65,82 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    // Redirect to 3D View Page
+    view3DButton.addEventListener("click", () => {
+        localStorage.setItem("canvasData", JSON.stringify(placedElements));
+        window.location.href = "3d-view.html";
+    });
 });
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const draggables = document.querySelectorAll(".draggable");
-//     const canvas = document.getElementById("canvas");
-
-//     draggables.forEach(item => {
-//         item.addEventListener("dragstart", (e) => {
-//             e.dataTransfer.setData("text/plain", e.target.id);
-//         });
-//     });
-
-//     canvas.addEventListener("dragover", (e) => {
-//         e.preventDefault();
-//     });
-
-//     canvas.addEventListener("drop", (e) => {
-//         e.preventDefault();
-//         const itemId = e.dataTransfer.getData("text/plain");
-//         const element = document.getElementById(itemId).cloneNode(true);
-//         element.style.position = "absolute";
-//         element.style.left = `${e.clientX - canvas.offsetLeft}px`;
-//         element.style.top = `${e.clientY - canvas.offsetTop}px`;
-//         canvas.appendChild(element);
-//     });
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const canvas = document.getElementById("canvas");
-//     let draggedElement = null;
-//     let offsetX = 0, offsetY = 0;
-
-//     // Function to allow moving elements
-//     function makeDraggable(element) {
-//         element.addEventListener("mousedown", (e) => {
-//             draggedElement = element;
-//             offsetX = e.clientX - element.offsetLeft;
-//             offsetY = e.clientY - element.offsetTop;
-//             element.style.cursor = "grabbing";
-//         });
-
-//         document.addEventListener("mousemove", (e) => {
-//             if (!draggedElement) return;
-//             let x = e.clientX - offsetX;
-//             let y = e.clientY - offsetY;
-
-//             // Keep within canvas boundaries
-//             const rect = canvas.getBoundingClientRect();
-//             const elemWidth = draggedElement.offsetWidth;
-//             const elemHeight = draggedElement.offsetHeight;
-
-//             x = Math.max(rect.left, Math.min(x, rect.right - elemWidth));
-//             y = Math.max(rect.top, Math.min(y, rect.bottom - elemHeight));
-
-//             draggedElement.style.left = `${x}px`;
-//             draggedElement.style.top = `${y}px`;
-//         });
-
-//         document.addEventListener("mouseup", () => {
-//             if (draggedElement) {
-//                 draggedElement.style.cursor = "grab";
-//                 draggedElement = null;
-//             }
-//         });
-//     }
-
-//     // Example: Adding an element dynamically
-//     canvas.addEventListener("click", (e) => {
-//         const newElement = document.createElement("div");
-//         newElement.classList.add("draggable-item");
-//         newElement.style.position = "absolute";
-//         newElement.style.left = `${e.clientX - canvas.offsetLeft}px`;
-//         newElement.style.top = `${e.clientY - canvas.offsetTop}px`;
-
-//         makeDraggable(newElement);
-//         canvas.appendChild(newElement);
-//     });
-// });
